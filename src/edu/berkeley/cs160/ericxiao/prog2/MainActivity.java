@@ -32,6 +32,7 @@ public class MainActivity extends Activity {
 	int color = Color.BLACK;
 	float width = 1f;
 
+	Canvas currentCanvas;
 	LinearLayout layout;
 
 	private Paint paint = new Paint();
@@ -63,6 +64,7 @@ public class MainActivity extends Activity {
 		@Override
 		protected void onDraw(Canvas canvas) {
 			canvas.drawPath(path, paint);
+			currentCanvas = canvas;
 		}
 
 	}
@@ -143,33 +145,31 @@ public class MainActivity extends Activity {
 		w = w / 2;
 		h = h / 2;
 		System.out.println("hi");
-		Matrix scaleMatrix1 = new Matrix();
-		scaleMatrix1.setScale(0.50f, 0.50f, 0, 0);
-		allPaths.get(0).transform(scaleMatrix1);
+		Matrix scaleMatrix0 = new Matrix();
+		scaleMatrix0.setScale(0.50f, 0.50f, 0, 0);
+		allPaths.get(0).transform(scaleMatrix0);
+		Paint newPaint0 = new Paint();
+		newPaint0.set(paint);
+		newPaint0.setColor(colorsUsed.get(0));
+		newPaint0.setStrokeWidth(widthsUsed.get(0));
 		path.addPath(allPaths.get(0));
 		mCustomView.invalidate();
 		
-		Matrix scaleMatrix2 = new Matrix();
-		scaleMatrix2.setScale(0.50f, 0.50f, 1.75f * w, 0);
-		allPaths.get(1).transform(scaleMatrix2);
+		Matrix scaleMatrix1 = new Matrix();
+		scaleMatrix1.setScale(0.50f, 0.50f, 1.75f * w, 0);
+		allPaths.get(1).transform(scaleMatrix1);
+		paint.setColor(colorsUsed.get(1));
+		paint.setStrokeWidth(widthsUsed.get(1));
 		path.addPath(allPaths.get(1));
 		mCustomView.invalidate();
 		
-		Matrix scaleMatrix3 = new Matrix();
-		scaleMatrix3.setScale(0.50f, 0.50f, 0, 1.75f * h);
-		allPaths.get(2).transform(scaleMatrix3);
+		Matrix scaleMatrix2 = new Matrix();
+		scaleMatrix2.setScale(0.50f, 0.50f, 0, 1.75f * h);
+		allPaths.get(2).transform(scaleMatrix2);
+		paint.setColor(colorsUsed.get(2));
+		paint.setStrokeWidth(widthsUsed.get(2));
 		path.addPath(allPaths.get(2));
 		mCustomView.invalidate();
-		
-		
-		
-//		for (int i = 0; i < allPaths.size(); i++) {
-//			allPaths.get(i).transform(scaleMatrix1);
-//			paint.setColor(colorsUsed.get(i));
-//			paint.setStrokeWidth(widthsUsed.get(i));
-//			path.addPath(allPaths.get(i));
-//			mCustomView.invalidate();
-//		}
 
 //		ArrayList<Path> first = savedDrawings.get(0);
 //		ArrayList<Path> second = savedDrawings.get(1);
