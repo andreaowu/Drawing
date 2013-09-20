@@ -119,10 +119,10 @@ public class MainActivity extends Activity {
 					// reset variables
 					// savedDrawings = new ArrayList<ArrayList<Path>>();
 					allPaths.add(path);
+					allPaths = new ArrayList<Path>();
 					((Button) findViewById(R.id.button1)).setText("Next");
 					counter = 4;
 				}
-				allPaths = new ArrayList<Path>();
 				mCustomView.invalidate();
 				path = new Path();
 				counter -= 1;
@@ -142,22 +142,35 @@ public class MainActivity extends Activity {
 		int h = metrics.heightPixels;
 		w = w / 2;
 		h = h / 2;
-
+		System.out.println("hi");
 		Matrix scaleMatrix1 = new Matrix();
 		scaleMatrix1.setScale(0.50f, 0.50f, 0, 0);
+		allPaths.get(0).transform(scaleMatrix1);
+		path.addPath(allPaths.get(0));
+		mCustomView.invalidate();
+		
 		Matrix scaleMatrix2 = new Matrix();
 		scaleMatrix2.setScale(0.50f, 0.50f, 1.75f * w, 0);
+		allPaths.get(1).transform(scaleMatrix2);
+		path.addPath(allPaths.get(1));
+		mCustomView.invalidate();
+		
 		Matrix scaleMatrix3 = new Matrix();
 		scaleMatrix3.setScale(0.50f, 0.50f, 0, 1.75f * h);
+		allPaths.get(2).transform(scaleMatrix3);
+		path.addPath(allPaths.get(2));
+		mCustomView.invalidate();
 		
-		for (int i = 0; i < allPaths.size(); i++) {
-			allPaths.get(i).transform(scaleMatrix1);
-			paint.setColor(colorsUsed.get(i));
-			paint.setStrokeWidth(widthsUsed.get(i));
-			path.addPath(allPaths.get(i));
-			mCustomView.invalidate();
-		}
 		
+		
+//		for (int i = 0; i < allPaths.size(); i++) {
+//			allPaths.get(i).transform(scaleMatrix1);
+//			paint.setColor(colorsUsed.get(i));
+//			paint.setStrokeWidth(widthsUsed.get(i));
+//			path.addPath(allPaths.get(i));
+//			mCustomView.invalidate();
+//		}
+
 //		ArrayList<Path> first = savedDrawings.get(0);
 //		ArrayList<Path> second = savedDrawings.get(1);
 //		ArrayList<Path> third = savedDrawings.get(2);
@@ -199,52 +212,58 @@ public class MainActivity extends Activity {
 		case R.id.red:
 			Toast.makeText(this, "You have chosen " + getResources().getString(R.string.red)
 							+ " .", Toast.LENGTH_SHORT).show();
-			addPath(Color.RED, -1f);
+//			addPath(Color.RED);
 			return true;
 		case R.id.orange:
 			Toast.makeText(this, "You have chosen " + getResources().getString(R.string.orange) + " .",
 					Toast.LENGTH_SHORT).show();
-			addPath(Color.rgb(255, 127, 0), -1f);
+			paint.setColor(Color.rgb(255, 127, 0));
+			color = Color.rgb(255, 127, 0);
 			return true;
 		case R.id.yellow:
 			Toast.makeText(this, "You have chosen " + getResources().getString(R.string.yellow) + " .",
 					Toast.LENGTH_SHORT).show();
-			addPath(Color.YELLOW, -1f);
+//			addPath(Color.YELLOW);
 			return true;
 		case R.id.green:
 			Toast.makeText(this, "You have chosen " + getResources().getString(R.string.green) + " .",
 					Toast.LENGTH_SHORT).show();
-			addPath(Color.GREEN, -1f);
+//			addPath(Color.GREEN);
 			return true;
 		case R.id.blue:
 			Toast.makeText(this, "You have chosen " + getResources().getString(R.string.blue) + " .",
 					Toast.LENGTH_SHORT).show();
-			addPath(Color.BLUE, -1f);
+//			addPath(Color.BLUE);
 			return true;
 		case R.id.purple:
 			Toast.makeText(this, "You have chosen " + getResources().getString(R.string.purple) + " .",
 					Toast.LENGTH_SHORT).show();
-			addPath(Color.rgb(148, 0, 211), -1f);
+//			addPath(Color.rgb(148, 0, 211));
 			return true;
 		case R.id.black:
 			Toast.makeText(this, "You have chosen " + getResources().getString(R.string.black) + " .",
 					Toast.LENGTH_SHORT).show();
-			addPath(Color.BLACK, -1f);
+//			addPath(Color.BLACK);
 			return true;
 		case R.id.small:
 			Toast.makeText(this, "You have chosen " + getResources().getString(R.string.small) + " stroke width.",
 					Toast.LENGTH_SHORT).show();
 			addPath(-1, 1f);
+			
 			return true;
 		case R.id.medium:
 			Toast.makeText(this, "You have chosen " + getResources().getString(R.string.small) + " stroke width.",
 					Toast.LENGTH_SHORT).show();
 			addPath(-1, 5f);
 			paint.setStrokeWidth(5f);
+			width = 5f;
+			return true;
 		case R.id.large:
 			Toast.makeText(this, "You have chosen " + getResources().getString(R.string.small) + " stroke width.",
 					Toast.LENGTH_SHORT).show();
 			addPath(-1, 10f);
+			paint.setStrokeWidth(10f);
+			width = 10f;
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
@@ -252,22 +271,18 @@ public class MainActivity extends Activity {
 	}
 
 	public void addPath(int color, float width) {
-//		paint = new Paint();
 		if (color > 0) {
-			this.color = color;
-			paint.setColor(this.color);
-//			paint.setStrokeWidth(this.width);
-		} else {
-			this.width = width;
-//			paint.setColor(this.color);
-			paint.setStrokeWidth(this.width);
+			
 		}
-
-//		Path old = path;
-//		allPaths.add(old);
-//		path = new Path();
-//		path.addPath(old);
-//		mCustomView.invalidate();
+		paint.setColor(Color.rgb(255, 127, 0));
+		color = Color.rgb(255, 127, 0);
+		
+		
+		
+		Path old = path;
+//		currentPaths.add(old);
+		path = new Path();
+		path.addPath(old);
 	}
-
+	
 }
