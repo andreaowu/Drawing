@@ -6,10 +6,43 @@
 		      <item android:id="@+id/red"
 		        	android:showAsAction="ifRoom"
 		            android:title="@string/red" />
+		      <item android:id="@+id/orange" 
+		          android:title="@string/orange" 
+		          android:showAsAction="ifRoom" />
+		      <item android:id="@+id/yellow" 
+		          android:title="@string/yellow" 
+		          android:showAsAction="ifRoom" />
+		      <item android:id="@+id/green" 
+		          android:title="@string/green" 
+		          android:showAsAction="ifRoom" />
+		      <item android:id="@+id/blue" 
+		          android:title="@string/blue" 
+		          android:showAsAction="ifRoom" />
+		      <item android:id="@+id/purple" 
+		          android:title="@string/purple" 
+		          android:showAsAction="ifRoom" />
 		      <item android:id="@+id/black" 
 		          android:title="@string/black" 
 		          android:showAsAction="ifRoom"
 		          android:checked="true" />
+		      </group>
+	      </menu>
+      </item>
+      
+      <item android:id="@+id/stroke"
+          android:title="@string/stroke" android:showAsAction="ifRoom">
+	      <menu>
+	      <group android:checkableBehavior="single">
+		      <item android:id="@+id/small"
+		        	android:showAsAction="ifRoom"
+		        	android:title="@string/small"
+		         	android:checked="true" />
+		      <item android:id="@+id/medium" 
+		          android:title="@string/medium" 
+		          android:showAsAction="ifRoom" />
+		      <item android:id="@+id/large" 
+		          android:title="@string/large" 
+		          android:showAsAction="ifRoom" />
 		      </group>
 	      </menu>
       </item>
