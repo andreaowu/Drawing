@@ -33,7 +33,7 @@ public class MainActivity extends Activity {
 	OnTouchListener touchListener;
 
 	int color = Color.BLACK;
-	float width = 1f;
+	float width = 3f;
 	int counter = 0;
 
 	private Button nextButton;
@@ -166,6 +166,10 @@ public class MainActivity extends Activity {
 						layout.removeView(allDrawings.get(i));
 					}
 					allDrawings = new ArrayList<DrawArea>();
+					menu.findItem(R.id.black).setChecked(true);
+					menu.findItem(R.id.small).setChecked(true);
+					color = Color.BLACK;
+					width = 3f;
 				}
 				counter -= 1;
 				if (counter == 1) {
@@ -195,14 +199,14 @@ public class MainActivity extends Activity {
 		allDrawings.get(0).invalidate();
 
 		LinearLayout.LayoutParams layoutParams1 = (LinearLayout.LayoutParams) allDrawings.get(1).getLayoutParams();
-		layoutParams1.leftMargin = -500;
+		layoutParams1.leftMargin = -550;
 		layoutParams1.topMargin = -300;
 		allDrawings.get(1).setLayoutParams(layoutParams1);
 		allDrawings.get(1).invalidate();
 		
 		LinearLayout.LayoutParams layoutParams2 = (LinearLayout.LayoutParams) allDrawings.get(2).getLayoutParams();
 		layoutParams2.leftMargin = -975;
-		layoutParams2.topMargin = 350;
+		layoutParams2.topMargin = 200;
 		allDrawings.get(2).setLayoutParams(layoutParams2);
 		allDrawings.get(2).invalidate();
 		
@@ -224,54 +228,54 @@ public class MainActivity extends Activity {
 		menu.findItem(item.getItemId()).setChecked(true);
 		switch (item.getItemId()) {
 		case R.id.red:
-			Toast.makeText(this, "You have chosen " + getResources().getString(R.string.red)
-							+ " .", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "You have chosen " + getResources().getString(R.string.red) + ".", 
+					Toast.LENGTH_SHORT).show();
 			color = Color.RED;
 			return true;
 		case R.id.orange:
-			Toast.makeText(this, "You have chosen " + getResources().getString(R.string.orange) + " .",
+			Toast.makeText(this, "You have chosen " + getResources().getString(R.string.orange) + ".",
 					Toast.LENGTH_SHORT).show();
 			color = Color.rgb(255, 127, 0);
 			return true;
 		case R.id.yellow:
-			Toast.makeText(this, "You have chosen " + getResources().getString(R.string.yellow) + " .",
+			Toast.makeText(this, "You have chosen " + getResources().getString(R.string.yellow) + ".",
 					Toast.LENGTH_SHORT).show();
 			color = Color.YELLOW;
 			return true;
 		case R.id.green:
-			Toast.makeText(this, "You have chosen " + getResources().getString(R.string.green) + " .",
+			Toast.makeText(this, "You have chosen " + getResources().getString(R.string.green) + ".",
 					Toast.LENGTH_SHORT).show();
 			color = Color.GREEN;
 			return true;
 		case R.id.blue:
-			Toast.makeText(this, "You have chosen " + getResources().getString(R.string.blue) + " .",
+			Toast.makeText(this, "You have chosen " + getResources().getString(R.string.blue) + ".",
 					Toast.LENGTH_SHORT).show();
 			color = Color.BLUE;
 			return true;
 		case R.id.purple:
-			Toast.makeText(this, "You have chosen " + getResources().getString(R.string.purple) + " .",
+			Toast.makeText(this, "You have chosen " + getResources().getString(R.string.purple) + ".",
 					Toast.LENGTH_SHORT).show();
 			color = Color.rgb(148, 0, 211);
 			return true;
 		case R.id.black:
-			Toast.makeText(this, "You have chosen " + getResources().getString(R.string.black) + " .",
+			Toast.makeText(this, "You have chosen " + getResources().getString(R.string.black) + ".",
 					Toast.LENGTH_SHORT).show();
 			color = Color.BLACK;
 			return true;
 		case R.id.small:
 			Toast.makeText(this, "You have chosen " + getResources().getString(R.string.small) + " stroke width.",
 					Toast.LENGTH_SHORT).show();
-			width = 1f;
+			width = 3f;
 			return true;
 		case R.id.medium:
 			Toast.makeText(this, "You have chosen " + getResources().getString(R.string.medium) + " stroke width.",
 					Toast.LENGTH_SHORT).show();
-			width = 5f;
+			width = 8f;
 			return true;
 		case R.id.large:
 			Toast.makeText(this, "You have chosen " + getResources().getString(R.string.large) + " stroke width.",
 					Toast.LENGTH_SHORT).show();
-			width = 10f;
+			width = 15f;
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
