@@ -32,18 +32,22 @@ public class MainActivity extends Activity {
 	// A listener that reacts to touches
 	OnTouchListener touchListener;
 
+    // Color for the drawing
 	int color = Color.BLACK;
+    // Line width for the drawing
 	float width = 3f;
+    // Keeps track of when to do "Next", "Finish", or "Reset" mode
 	int counter = 0;
 
+    // Button for Next/Finish/Reset
 	private Button nextButton;
-	
-	Canvas currentCanvas;
+    // Current view that is being drawn on
 	DrawArea da;
+    // Current layout
 	LinearLayout layout;
-
+    // Menu bar at the top
 	Menu menu;
-	
+	// List of all drawings
 	ArrayList<DrawArea> allDrawings;
 
 	@Override
@@ -51,13 +55,14 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
+        // Setting up the layout
 		layout = (LinearLayout) findViewById(R.id.ll);
 		da = new DrawArea(this);
 		layout.addView(da);
 		
+        // Setting up other variables
 		counter = 3;
 		addListenerOnButton();
-		
 		allDrawings = new ArrayList<DrawArea>();
 	}
 
@@ -72,7 +77,9 @@ public class MainActivity extends Activity {
 			_activeStrokes = new SparseArray<Stroke>();
 		}
 
+        @Override
 		public void onDraw(Canvas canvas) {
+            // Draws all non-null strokes that are in _allStrokes
 			if (_allStrokes != null) {
 				for (Stroke stroke : _allStrokes) {
 					if (stroke != null) {
@@ -150,10 +157,9 @@ public class MainActivity extends Activity {
 		nextButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+                // Add current da to list and reset da
 				allDrawings.add(da);
-				System.out.println("allDrawings size: " + allDrawings.size());
 				layout.removeView(da);
-				System.out.println("allDrawings size after: " + allDrawings.size());
 				da = new DrawArea(MainActivity.this);
 				layout.addView(da);
 
@@ -162,9 +168,11 @@ public class MainActivity extends Activity {
 					// reset variables
 					((Button) findViewById(R.id.button1)).setText("Next");
 					counter = 4;
+                    // clear views
 					for (int i = 0; i < allDrawings.size(); i++) {
 						layout.removeView(allDrawings.get(i));
 					}
+                    // reset drawing tools
 					allDrawings = new ArrayList<DrawArea>();
 					menu.findItem(R.id.black).setChecked(true);
 					menu.findItem(R.id.small).setChecked(true);
@@ -182,34 +190,34 @@ public class MainActivity extends Activity {
 	}
 	
 	public void displayFinish() {
-		DisplayMetrics metrics = getBaseContext().getResources().getDisplayMetrics();
-		int w = metrics.widthPixels;
-		int h = metrics.heightPixels;
-		w = w / 2;
-		h = h / 2;
+        // resets layout to draw everything on it
 		layout.removeAllViews();
 		layout = (LinearLayout) findViewById(R.id.ll);
 		nextButton.setText("Reset");
 		layout.addView(nextButton);
 		
+        // set up layout parameters for first drawing
 		LinearLayout.LayoutParams layoutParams0 = (LinearLayout.LayoutParams) allDrawings.get(0).getLayoutParams();
 		layoutParams0.leftMargin = -300;
 		layoutParams0.topMargin = -300;
 		allDrawings.get(0).setLayoutParams(layoutParams0);
 		allDrawings.get(0).invalidate();
 
+        // set up layout parameters for second drawing
 		LinearLayout.LayoutParams layoutParams1 = (LinearLayout.LayoutParams) allDrawings.get(1).getLayoutParams();
 		layoutParams1.leftMargin = -550;
 		layoutParams1.topMargin = -300;
 		allDrawings.get(1).setLayoutParams(layoutParams1);
 		allDrawings.get(1).invalidate();
 		
+        // set up layout parameters for third drawing
 		LinearLayout.LayoutParams layoutParams2 = (LinearLayout.LayoutParams) allDrawings.get(2).getLayoutParams();
 		layoutParams2.leftMargin = -975;
 		layoutParams2.topMargin = 200;
 		allDrawings.get(2).setLayoutParams(layoutParams2);
 		allDrawings.get(2).invalidate();
 		
+        // scale all and add all layouts
 		for (int i = 0; i < allDrawings.size(); i++) {
 			allDrawings.get(i).setScaleX(0.5f);
 			allDrawings.get(i).setScaleY(0.5f);
@@ -217,6 +225,7 @@ public class MainActivity extends Activity {
 		}
 	}
 	
+    // puts all menu items onto the menu
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.activity_main, menu);
@@ -224,6 +233,7 @@ public class MainActivity extends Activity {
 		return true;
 	}
 	
+    // changes the color and stroke width with accordance to what is chosen in the drop down menus
 	public boolean onOptionsItemSelected(MenuItem item) {
 		menu.findItem(item.getItemId()).setChecked(true);
 		switch (item.getItemId()) {
