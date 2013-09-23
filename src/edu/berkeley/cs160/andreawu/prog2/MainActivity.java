@@ -11,6 +11,11 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Point;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.PorterDuff.Mode;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.PaintDrawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.SparseArray;
@@ -34,6 +39,8 @@ public class MainActivity extends Activity {
 
     // Color for the drawing
 	int color = Color.BLACK;
+	// True if erase mode, false if draw mode
+	boolean erase = false;
     // Line width for the drawing
 	float width = 3f;
     // Keeps track of when to do "Next", "Finish", or "Reset" mode
@@ -64,6 +71,7 @@ public class MainActivity extends Activity {
 		counter = 3;
 		addListenerOnButton();
 		allDrawings = new ArrayList<DrawArea>();
+
 	}
 
 	public class DrawArea extends View {
@@ -131,7 +139,11 @@ public class MainActivity extends Activity {
 			// create a paint with color and width
 			Paint paint = new Paint();
 			paint.setStyle(Paint.Style.STROKE);
-			paint.setColor(color);
+			if (erase) {
+				paint.setColor(Color.WHITE);
+			} else {
+				paint.setColor(color);
+			}
 			paint.setStrokeWidth(width);
 
 			// create the Stroke
@@ -237,6 +249,16 @@ public class MainActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		menu.findItem(item.getItemId()).setChecked(true);
 		switch (item.getItemId()) {
+		case R.id.draw:
+			Toast.makeText(this, "You have chosen to " + getResources().getString(R.string.draw) + ".",
+					Toast.LENGTH_SHORT).show();
+			erase = false;
+			return true;
+		case R.id.erase:
+			Toast.makeText(this, "You have chosen to " + getResources().getString(R.string.erase) + ".",
+					Toast.LENGTH_SHORT).show();
+			erase = true;
+			return true;
 		case R.id.red:
 			Toast.makeText(this, "You have chosen " + getResources().getString(R.string.red) + ".", 
 					Toast.LENGTH_SHORT).show();

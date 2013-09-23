@@ -14,14 +14,13 @@
   	<string name="purple">Purple</string>
     <string name="black">Black</string>
 
-    <string name="button_text">Custom Button</string>
-    <string name="eraser">Eraser</string>
-    <string name="clear">Clear</string>
-    <string name="shape">Toggle Shape</string>
-    
     <string name="stroke">Stroke Width</string>
     <string name="small">Small</string>
     <string name="medium">Medium</string>
     <string name="large">Large</string>
+    
+    <string name="action">Action</string>
+    <string name="draw">Draw</string>
+    <string name="erase">Erase</string>
         
 </resources>
